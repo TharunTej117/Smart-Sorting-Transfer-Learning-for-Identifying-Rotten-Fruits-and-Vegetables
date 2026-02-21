@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Sort – Freshness Classifier</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background: linear-gradient(to right, #f9f9f9, #d6f0e5);">
+
+  <!-- Title Header -->
+  <div style="background: #1e5631; color: white; text-align: center; padding: 50px 20px;">
+    <h1 style="font-size: 3em; margin-bottom: 10px;">🍏 Smart Sort</h1>
+    <p style="font-size: 1.2em;">Detecting Freshness of Fruits & Vegetables with AI</p>
+  </div>
+
+  <!-- Split Layout -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; padding: 40px;">
+
+    <!-- Left Panel: Info -->
+    <div style="flex: 1; min-width: 300px; max-width: 480px; padding: 30px;">
+      <h2 style="color: #1e5631;">About Smart Sort</h2>
+      <p>Smart Sort is an intelligent produce classifier that tells you if a fruit or vegetable is <strong>fresh</strong> or <strong>rotten</strong> in real time. Here is how you can check.</p>
+      <ul>
+        <li>✅ Upload a fruit or veggie image</li>
+        <li>✅ Instant freshness prediction</li>
+        <li>✅ Powered by deep learning</li>
+      </ul>
+    </div>
+
+    <!-- Right Panel: Upload Form -->
+    <div style="flex: 1; min-width: 300px; max-width: 480px; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.08); text-align: center;">
+      <h2 style="color: #1e5631;"> Try It Now</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" onchange="showPreview(event)" required
+          style="margin: 20px 0; padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 100%;" />
+        <br>
+        <input type="submit" value="Check Freshness"
+          style="padding: 10px 24px; background: #1e5631; color: white; border: none; border-radius: 6px; cursor: pointer;" />
+      </form>
+      <img id="preview" src="#" alt="Image Preview" style="display: none; margin-top: 20px; max-width: 100%; border-radius: 8px; border: 1px solid #ccc;" />
+      {% if prediction %}
+        <div style="margin-top: 20px; padding: 12px; background: #e6f9ee; border-left: 5px solid #2ecc71; border-radius: 6px;">
+          🔍 <strong>Prediction:</strong> {{ prediction }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- JavaScript for Preview -->
+  <script>
+    function showPreview(event) {
+      const file = event.target.files[0];
+      const preview = document.getElementById("preview");
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>
